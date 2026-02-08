@@ -1,0 +1,1031 @@
+.dashboard {
+    min-height: 100vh;
+    padding: 24px;
+    max-width: 1600px;
+    margin: 0 auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.titleArea {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.title {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 14px;
+    margin: 0;
+}
+
+.headerActions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.themeToggle {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: var(--text-primary);
+    font-size: 20px;
+}
+
+.themeToggle:hover {
+    background: var(--hover-bg);
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+/* Grid Layout */
+.grid {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.gridTopRow {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 24px;
+}
+
+@media (max-width: 1200px) {
+    .gridTopRow {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Section Card */
+.section {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s ease;
+    animation: slideInUp 0.5s ease-out;
+}
+
+.section:hover {
+    border-color: rgba(99, 102, 241, 0.2);
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sectionIcon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    font-size: 18px;
+}
+
+/* View Mode Toggle */
+.viewModeToggle {
+    display: flex;
+    background: var(--input-bg);
+    border-radius: 10px;
+    padding: 4px;
+    gap: 4px;
+}
+
+.viewModeBtn {
+    padding: 8px 16px;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.viewModeBtn:hover {
+    color: var(--text-primary);
+    background: var(--hover-bg);
+}
+
+.viewModeBtnActive {
+    background: var(--primary);
+    color: white;
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.3);
+}
+
+.viewModeBtnActive:hover {
+    background: var(--primary-light);
+    color: white;
+}
+
+/* Overall Progress Section */
+.overallProgress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+}
+
+.progressRingContainer {
+    position: relative;
+    width: 180px;
+    height: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.progressRingSvg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: rotate(-90deg);
+}
+
+.progressRingBg {
+    fill: none;
+    stroke: var(--ring-bg);
+    stroke-width: 12;
+}
+
+.progressRingFill {
+    fill: none;
+    stroke-width: 12;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.progressRingCenter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.progressPercentage {
+    font-size: 42px;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1;
+}
+
+.progressLabel {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.progressStats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    width: 100%;
+}
+
+.progressStat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 12px;
+    background: var(--input-bg);
+    border-radius: 12px;
+}
+
+.progressStatValue {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.progressStatLabel {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Completion Section */
+.completionSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.completionViewLabel {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.completionViewLabelHighlight {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.completionChart {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+}
+
+.pieChartContainer {
+    position: relative;
+    width: 180px;
+    height: 180px;
+}
+
+.pieChartSvg {
+    transform: rotate(-90deg);
+}
+
+.pieChartBg {
+    fill: none;
+    stroke: var(--ring-bg);
+    stroke-width: 20;
+}
+
+.pieChartFill {
+    fill: none;
+    stroke-width: 20;
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pieChartCenter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.pieChartPercent {
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.pieChartLabel {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.completionStats {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border-color);
+}
+
+.completionStatItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.completionStatValue {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.completionStatTitle {
+    font-size: 11px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+}
+
+/* Completion Mini Cards (for bar chart view) */
+.completionMiniCards {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+}
+
+.completionMiniCardsWeekly {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.completionMiniCardsMonthly {
+    grid-template-columns: repeat(6, 1fr);
+    max-height: 300px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.completionMiniCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 12px 8px;
+    background: var(--input-bg);
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+.completionMiniCard:hover {
+    background: var(--hover-bg);
+}
+
+.completionMiniCardActive {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(16, 185, 129, 0.05) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.completionMiniBar {
+    width: 100%;
+    height: 40px;
+    background: var(--ring-bg);
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.completionMiniBarFill {
+    width: 100%;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-dark) 100%);
+    border-radius: 4px 4px 0 0;
+    transition: height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 2px;
+}
+
+.completionMiniCardActive .completionMiniBarFill {
+    background: linear-gradient(180deg, var(--success) 0%, #059669 100%);
+}
+
+.completionMiniPercent {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.completionMiniLabel {
+    font-size: 10px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.completionMiniCardActive .completionMiniLabel {
+    color: var(--success);
+}
+
+/* Habit Tracker */
+.habitTracker {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.habitRow {
+    display: grid;
+    grid-template-columns: 1fr auto 200px;
+    align-items: center;
+    gap: 16px;
+    padding: 14px 16px;
+    background: var(--input-bg);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    animation: fadeIn 0.4s ease-out;
+}
+
+.habitRow:hover {
+    background: var(--hover-bg);
+}
+
+.habitInfo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.habitColorDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.habitName {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.habitNameInput {
+    background: transparent;
+    border: none;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-primary);
+    padding: 4px 8px;
+    border-radius: 6px;
+    width: 100%;
+}
+
+.habitNameInput:focus {
+    outline: none;
+    background: var(--card-bg);
+    border: 1px solid var(--primary);
+}
+
+.habitCheckboxes {
+    display: flex;
+    gap: 8px;
+}
+
+.habitCheckbox {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 2px solid var(--border-color);
+    background: var(--card-bg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-size: 14px;
+    color: transparent;
+}
+
+.habitCheckbox:hover {
+    border-color: var(--primary);
+    transform: scale(1.1);
+}
+
+.habitCheckboxChecked {
+    border-color: transparent;
+    color: white;
+}
+
+.habitCheckboxToday {
+    border-color: var(--success);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.2);
+}
+
+.habitProgress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.habitProgressBar {
+    flex: 1;
+    height: 8px;
+    background: var(--ring-bg);
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.habitProgressFill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.habitProgressText {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    min-width: 40px;
+    text-align: right;
+}
+
+.habitActions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.habitRow:hover .habitActions {
+    opacity: 1;
+}
+
+.habitActionBtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    transition: all 0.2s ease;
+}
+
+.habitActionBtn:hover {
+    background: var(--hover-bg);
+    color: var(--primary);
+}
+
+.habitActionBtnDanger:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+.addHabitBtn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    border: 2px dashed var(--border-color);
+    border-radius: 12px;
+    background: transparent;
+    color: var(--text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.addHabitBtn:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--hover-bg);
+}
+
+/* Tasks Section */
+.tasksSection {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Daily Tasks Grid */
+.dailyTasksGrid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 1200px) {
+    .dailyTasksGrid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .dailyTasksGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Weekly Tasks Grid */
+.weeklyTasksGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+@media (max-width: 1000px) {
+    .weeklyTasksGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .weeklyTasksGrid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Monthly Tasks Grid */
+.monthlyTasksGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 12px;
+    max-height: 600px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+@media (max-width: 1200px) {
+    .monthlyTasksGrid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .monthlyTasksGrid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .monthlyTasksGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Task Card (for each day/week) */
+.taskCard {
+    background: var(--input-bg);
+    border-radius: 14px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+}
+
+.taskCard:hover {
+    background: var(--hover-bg);
+}
+
+.taskCardToday {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(16, 185, 129, 0.02) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.taskCardHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.taskCardTitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.taskCardToday .taskCardTitle {
+    color: var(--success);
+}
+
+.taskCardBadge {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: var(--card-bg);
+    color: var(--text-secondary);
+}
+
+.taskCardBadgeComplete {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.2) 0%, rgba(16, 185, 129, 0.1) 100%);
+    color: var(--success);
+}
+
+.taskCardList {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+    max-height: 120px;
+}
+
+.taskCardEmpty {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-tertiary);
+    font-size: 12px;
+}
+
+/* Task Item */
+.taskItem {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 8px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.taskItem:hover {
+    background: var(--hover-bg);
+}
+
+.taskCheckbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 5px;
+    border: 2px solid var(--border-color);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    color: transparent;
+    font-size: 10px;
+}
+
+.taskCheckbox:hover {
+    border-color: var(--primary);
+}
+
+.taskCheckboxChecked {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+}
+
+.taskText {
+    flex: 1;
+    font-size: 12px;
+    color: var(--text-primary);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.taskTextCompleted {
+    color: var(--text-tertiary);
+    text-decoration: line-through;
+}
+
+.taskTextInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    font-size: 12px;
+    color: var(--text-primary);
+    padding: 0;
+    min-width: 0;
+}
+
+.taskTextInput:focus {
+    outline: none;
+}
+
+.taskDeleteBtn {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    font-size: 10px;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+.taskItem:hover .taskDeleteBtn {
+    opacity: 1;
+}
+
+.taskDeleteBtn:hover {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--error);
+}
+
+/* Add Task Form */
+.addTaskForm {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.addTaskInput {
+    flex: 1;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 6px 10px;
+    font-size: 12px;
+    color: var(--text-primary);
+    transition: all 0.2s ease;
+    min-width: 0;
+}
+
+.addTaskInput:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.addTaskInput::placeholder {
+    color: var(--text-tertiary);
+}
+
+.addTaskBtn {
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    font-size: 12px;
+    flex-shrink: 0;
+}
+
+.addTaskBtn:hover {
+    background: var(--primary-light);
+    transform: scale(1.05);
+}
+
+.addTaskBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Reset Button */
+.resetBtn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-secondary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.resetBtn:hover {
+    border-color: var(--error);
+    color: var(--error);
+    background: rgba(239, 68, 68, 0.1);
+}
+
+/* Color Picker */
+.colorPicker {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 8px;
+}
+
+.colorOption {
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.2s ease;
+}
+
+.colorOption:hover {
+    transform: scale(1.15);
+}
+
+.colorOptionSelected {
+    border-color: white;
+    box-shadow: 0 0 0 2px var(--primary);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animated {
+    animation: slideInUp 0.4s ease-out forwards;
+}
+
+/* Animation delays */
+.taskCard:nth-child(1) {
+    animation-delay: 0.02s;
+}
+
+.taskCard:nth-child(2) {
+    animation-delay: 0.04s;
+}
+
+.taskCard:nth-child(3) {
+    animation-delay: 0.06s;
+}
+
+.taskCard:nth-child(4) {
+    animation-delay: 0.08s;
+}
+
+.taskCard:nth-child(5) {
+    animation-delay: 0.1s;
+}
+
+.taskCard:nth-child(6) {
+    animation-delay: 0.12s;
+}
+
+.taskCard:nth-child(7) {
+    animation-delay: 0.14s;
+}
+
+.habitRow:nth-child(1) {
+    animation-delay: 0.05s;
+}
+
+.habitRow:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.habitRow:nth-child(3) {
+    animation-delay: 0.15s;
+}
+
+.habitRow:nth-child(4) {
+    animation-delay: 0.2s;
+}
+
+.habitRow:nth-child(5) {
+    animation-delay: 0.25s;
+}
