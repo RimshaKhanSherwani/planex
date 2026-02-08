@@ -9,7 +9,6 @@ import {
   SunOutlined,
   MoonOutlined,
   ReloadOutlined,
-  TrophyOutlined,
   FireOutlined,
   PieChartOutlined,
   UnorderedListOutlined,
@@ -45,7 +44,6 @@ export default function Dashboard() {
     weeklyOverallCompletion,
     monthlyTasksCompletion,
     monthlyOverallCompletion,
-    currentCompletion,
     toggleTheme,
     setTaskViewMode,
     toggleHabitDay,
@@ -204,200 +202,139 @@ export default function Dashboard() {
       </header>
 
       <div className={styles.grid}>
-        {/* Top Row: Overall Progress + Habit Tracker */}
-        <div className={styles.gridTopRow}>
-          {/* Overall Progress Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>
-                <span className={styles.sectionIcon}><TrophyOutlined /></span>
-                Overall Progress
-              </h2>
-            </div>
-            <div className={styles.overallProgress}>
-              {/* Progress Ring */}
-              <div className={styles.progressRingContainer}>
-                <svg
-                  className={styles.progressRingSvg}
-                  width="180"
-                  height="180"
-                  viewBox="0 0 180 180"
-                >
-                  <circle
-                    className={styles.progressRingBg}
-                    cx="90"
-                    cy="90"
-                    r="78"
+        {/* Habit Tracker Section */}
+        <section className={styles.section}>
+          <div className={styles.sectionHeader}>
+            <h2 className={styles.sectionTitle}>
+              <span className={styles.sectionIcon}><FireOutlined /></span>
+              Habit Tracker
+            </h2>
+            <Popconfirm
+              title="Reset Habits"
+              description="Clear all habit progress for the week?"
+              onConfirm={() => { resetHabits(); message.success('Habits reset!'); }}
+              okText="Reset"
+              cancelText="Cancel"
+              okButtonProps={{ danger: true }}
+            >
+              <button className={styles.resetBtn}>
+                <ReloadOutlined />
+                Reset
+              </button>
+            </Popconfirm>
+          </div>
+          <div className={styles.habitTracker}>
+            {habitProgress.map((habit) => (
+              <div key={habit.id} className={styles.habitRow}>
+                <div className={styles.habitInfo}>
+                  <div
+                    className={styles.habitColorDot}
+                    style={{ backgroundColor: habit.color }}
                   />
-                  <circle
-                    className={styles.progressRingFill}
-                    cx="90"
-                    cy="90"
-                    r="78"
-                    stroke="url(#progressGradient)"
-                    strokeDasharray={2 * Math.PI * 78}
-                    strokeDashoffset={2 * Math.PI * 78 - (currentCompletion.percentage / 100) * 2 * Math.PI * 78}
-                  />
-                  <defs>
-                    <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stopColor="#6366f1" />
-                      <stop offset="100%" stopColor="#10b981" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-                <div className={styles.progressRingCenter}>
-                  <span className={styles.progressPercentage}>{currentCompletion.percentage}%</span>
-                  <span className={styles.progressLabel}>{getViewLabel()}</span>
-                </div>
-              </div>
-
-              <div className={styles.progressStats}>
-                <div className={styles.progressStat}>
-                  <span className={styles.progressStatValue}>{currentCompletion.completed}</span>
-                  <span className={styles.progressStatLabel}>Done</span>
-                </div>
-                <div className={styles.progressStat}>
-                  <span className={styles.progressStatValue}>{currentCompletion.total}</span>
-                  <span className={styles.progressStatLabel}>Total</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Habit Tracker Section */}
-          <section className={styles.section}>
-            <div className={styles.sectionHeader}>
-              <h2 className={styles.sectionTitle}>
-                <span className={styles.sectionIcon}><FireOutlined /></span>
-                Habit Tracker
-              </h2>
-              <Popconfirm
-                title="Reset Habits"
-                description="Clear all habit progress for the week?"
-                onConfirm={() => { resetHabits(); message.success('Habits reset!'); }}
-                okText="Reset"
-                cancelText="Cancel"
-                okButtonProps={{ danger: true }}
-              >
-                <button className={styles.resetBtn}>
-                  <ReloadOutlined />
-                  Reset
-                </button>
-              </Popconfirm>
-            </div>
-            <div className={styles.habitTracker}>
-              {habitProgress.map((habit) => (
-                <div key={habit.id} className={styles.habitRow}>
-                  <div className={styles.habitInfo}>
-                    <div
-                      className={styles.habitColorDot}
-                      style={{ backgroundColor: habit.color }}
-                    />
-                    {editingHabit === habit.id ? (
-                      <input
-                        ref={editInputRef}
-                        type="text"
-                        className={styles.habitNameInput}
-                        defaultValue={habit.name}
-                        onBlur={(e) => handleUpdateHabit(habit.id, e.target.value)}
-                        onKeyDown={(e) => {
-                          if (e.key === 'Enter') handleUpdateHabit(habit.id, e.currentTarget.value);
-                          else if (e.key === 'Escape') setEditingHabit(null);
-                        }}
-                      />
-                    ) : (
-                      <span
-                        className={styles.habitName}
-                        onDoubleClick={() => setEditingHabit(habit.id)}
-                      >
-                        {habit.name}
-                      </span>
-                    )}
-                    <div className={styles.habitActions}>
-                      <Popconfirm
-                        title="Delete habit"
-                        description="Are you sure?"
-                        onConfirm={() => removeHabit(habit.id)}
-                        okText="Delete"
-                        cancelText="Cancel"
-                        okButtonProps={{ danger: true }}
-                      >
-                        <button className={`${styles.habitActionBtn} ${styles.habitActionBtnDanger}`}>
-                          <DeleteOutlined />
-                        </button>
-                      </Popconfirm>
-                    </div>
-                  </div>
-
-                  <div className={styles.habitCheckboxes}>
-                    {habit.weeklyProgress.map((checked, dayIndex) => {
-                      const isTodayDay = isToday(DAY_NAMES[dayIndex]);
-                      return (
-                        <button
-                          key={dayIndex}
-                          className={`${styles.habitCheckbox} ${checked ? styles.habitCheckboxChecked : ''} ${isTodayDay ? styles.habitCheckboxToday : ''}`}
-                          style={checked ? { backgroundColor: habit.color } : undefined}
-                          onClick={() => toggleHabitDay(habit.id, dayIndex)}
-                          title={DAY_FULL_LABELS[DAY_NAMES[dayIndex]]}
-                        >
-                          {checked && <CheckOutlined />}
-                        </button>
-                      );
-                    })}
-                  </div>
-
-                  <div className={styles.habitProgress}>
-                    <div className={styles.habitProgressBar}>
-                      <div
-                        className={styles.habitProgressFill}
-                        style={{ width: `${habit.percentage}%`, backgroundColor: habit.color }}
-                      />
-                    </div>
-                    <span className={styles.habitProgressText}>{habit.completedDays}/7</span>
-                  </div>
-                </div>
-              ))}
-
-              {/* Add Habit */}
-              {showAddHabit ? (
-                <div className={styles.habitRow}>
-                  <div className={styles.habitInfo}>
-                    <Popover content={colorPickerContent} trigger="click" placement="bottom">
-                      <div
-                        className={styles.habitColorDot}
-                        style={{ backgroundColor: newHabitColor, cursor: 'pointer' }}
-                      />
-                    </Popover>
+                  {editingHabit === habit.id ? (
                     <input
+                      ref={editInputRef}
                       type="text"
                       className={styles.habitNameInput}
-                      placeholder="Enter habit name..."
-                      value={newHabitName}
-                      onChange={(e) => setNewHabitName(e.target.value)}
+                      defaultValue={habit.name}
+                      onBlur={(e) => handleUpdateHabit(habit.id, e.target.value)}
                       onKeyDown={(e) => {
-                        if (e.key === 'Enter') handleAddHabit();
-                        else if (e.key === 'Escape') { setShowAddHabit(false); setNewHabitName(''); }
+                        if (e.key === 'Enter') handleUpdateHabit(habit.id, e.currentTarget.value);
+                        else if (e.key === 'Escape') setEditingHabit(null);
                       }}
-                      autoFocus
                     />
-                  </div>
-                  <div style={{ display: 'flex', gap: '8px' }}>
-                    <button className={styles.addTaskBtn} onClick={handleAddHabit} disabled={!newHabitName.trim()}>
-                      <CheckOutlined />
-                    </button>
-                    <button className={styles.habitActionBtn} onClick={() => { setShowAddHabit(false); setNewHabitName(''); }}>
-                      ✕
-                    </button>
+                  ) : (
+                    <span
+                      className={styles.habitName}
+                      onDoubleClick={() => setEditingHabit(habit.id)}
+                    >
+                      {habit.name}
+                    </span>
+                  )}
+                  <div className={styles.habitActions}>
+                    <Popconfirm
+                      title="Delete habit"
+                      description="Are you sure?"
+                      onConfirm={() => removeHabit(habit.id)}
+                      okText="Delete"
+                      cancelText="Cancel"
+                      okButtonProps={{ danger: true }}
+                    >
+                      <button className={`${styles.habitActionBtn} ${styles.habitActionBtnDanger}`}>
+                        <DeleteOutlined />
+                      </button>
+                    </Popconfirm>
                   </div>
                 </div>
-              ) : (
-                <button className={styles.addHabitBtn} onClick={() => setShowAddHabit(true)}>
-                  <PlusOutlined /> Add New Habit
-                </button>
-              )}
-            </div>
-          </section>
-        </div>
+
+                <div className={styles.habitCheckboxes}>
+                  {habit.weeklyProgress.map((checked, dayIndex) => {
+                    const isTodayDay = isToday(DAY_NAMES[dayIndex]);
+                    return (
+                      <button
+                        key={dayIndex}
+                        className={`${styles.habitCheckbox} ${checked ? styles.habitCheckboxChecked : ''} ${isTodayDay ? styles.habitCheckboxToday : ''}`}
+                        style={checked ? { backgroundColor: habit.color } : undefined}
+                        onClick={() => toggleHabitDay(habit.id, dayIndex)}
+                        title={DAY_FULL_LABELS[DAY_NAMES[dayIndex]]}
+                      >
+                        {checked && <CheckOutlined />}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                <div className={styles.habitProgress}>
+                  <div className={styles.habitProgressBar}>
+                    <div
+                      className={styles.habitProgressFill}
+                      style={{ width: `${habit.percentage}%`, backgroundColor: habit.color }}
+                    />
+                  </div>
+                  <span className={styles.habitProgressText}>{habit.completedDays}/7</span>
+                </div>
+              </div>
+            ))}
+
+            {/* Add Habit */}
+            {showAddHabit ? (
+              <div className={styles.habitRow}>
+                <div className={styles.habitInfo}>
+                  <Popover content={colorPickerContent} trigger="click" placement="bottom">
+                    <div
+                      className={styles.habitColorDot}
+                      style={{ backgroundColor: newHabitColor, cursor: 'pointer' }}
+                    />
+                  </Popover>
+                  <input
+                    type="text"
+                    className={styles.habitNameInput}
+                    placeholder="Enter habit name..."
+                    value={newHabitName}
+                    onChange={(e) => setNewHabitName(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter') handleAddHabit();
+                      else if (e.key === 'Escape') { setShowAddHabit(false); setNewHabitName(''); }
+                    }}
+                    autoFocus
+                  />
+                </div>
+                <div style={{ display: 'flex', gap: '8px' }}>
+                  <button className={styles.addTaskBtn} onClick={handleAddHabit} disabled={!newHabitName.trim()}>
+                    <CheckOutlined />
+                  </button>
+                  <button className={styles.habitActionBtn} onClick={() => { setShowAddHabit(false); setNewHabitName(''); }}>
+                    ✕
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button className={styles.addHabitBtn} onClick={() => setShowAddHabit(true)}>
+                <PlusOutlined /> Add New Habit
+              </button>
+            )}
+          </div>
+        </section>
 
         {/* Completion Section */}
         <section className={styles.section}>
@@ -448,7 +385,7 @@ export default function Dashboard() {
 
             {/* Per-unit completion bars */}
             <div className={`${styles.completionMiniCards} ${taskViewMode === 'weekly' ? styles.completionMiniCardsWeekly :
-                taskViewMode === 'monthly' ? styles.completionMiniCardsMonthly : ''
+              taskViewMode === 'monthly' ? styles.completionMiniCardsMonthly : ''
               }`}>
               {taskViewMode === 'daily' && DAY_NAMES.map((day) => {
                 const rate = dailyTasksCompletion[day];

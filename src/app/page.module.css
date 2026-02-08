@@ -70,17 +70,7 @@
     gap: 24px;
 }
 
-.gridTopRow {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 24px;
-}
 
-@media (max-width: 1200px) {
-    .gridTopRow {
-        grid-template-columns: 1fr;
-    }
-}
 
 /* Section Card */
 .section {
@@ -164,93 +154,7 @@
     color: white;
 }
 
-/* Overall Progress Section */
-.overallProgress {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-}
 
-.progressRingContainer {
-    position: relative;
-    width: 180px;
-    height: 180px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.progressRingSvg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: rotate(-90deg);
-}
-
-.progressRingBg {
-    fill: none;
-    stroke: var(--ring-bg);
-    stroke-width: 12;
-}
-
-.progressRingFill {
-    fill: none;
-    stroke-width: 12;
-    stroke-linecap: round;
-    transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.progressRingCenter {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-}
-
-.progressPercentage {
-    font-size: 42px;
-    font-weight: 700;
-    color: var(--text-primary);
-    line-height: 1;
-}
-
-.progressLabel {
-    font-size: 12px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.progressStats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    width: 100%;
-}
-
-.progressStat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    padding: 12px;
-    background: var(--input-bg);
-    border-radius: 12px;
-}
-
-.progressStatValue {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.progressStatLabel {
-    font-size: 11px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
 
 /* Completion Section */
 .completionSection {

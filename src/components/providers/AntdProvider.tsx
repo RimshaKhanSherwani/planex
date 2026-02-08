@@ -3,27 +3,32 @@
 import { ConfigProvider, theme } from 'antd';
 import { useAtom } from 'jotai';
 import { themeAtom } from '@/store/dashboardStore';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useSyncExternalStore } from 'react';
 
 interface AntdProviderProps {
     children: ReactNode;
 }
 
+// Custom hook for hydration-safe mounting
+function useHydrated() {
+    return useSyncExternalStore(
+        () => () => { },
+        () => true,
+        () => false
+    );
+}
+
 export default function AntdProvider({ children }: AntdProviderProps) {
     const [currentTheme] = useAtom(themeAtom);
-    const [mounted, setMounted] = useState(false);
+    const hydrated = useHydrated();
 
     useEffect(() => {
-        setMounted(true);
-    }, []);
-
-    useEffect(() => {
-        if (mounted) {
+        if (hydrated) {
             document.documentElement.className = currentTheme;
         }
-    }, [currentTheme, mounted]);
+    }, [currentTheme, hydrated]);
 
-    if (!mounted) {
+    if (!hydrated) {
         return null;
     }
 
