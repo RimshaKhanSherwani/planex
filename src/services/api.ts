@@ -1,5 +1,3 @@
-// API Service - Placeholder for future API integrations
-// Currently, all data is stored locally using Jotai with localStorage persistence
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
 
@@ -9,7 +7,6 @@ interface ApiResponse<T> {
     success: boolean;
 }
 
-// Generic fetch wrapper with error handling
 async function fetchApi<T>(
     endpoint: string,
     options: RequestInit = {}
@@ -35,7 +32,6 @@ async function fetchApi<T>(
     }
 }
 
-// Export API methods for future use
 export const api = {
     get: <T>(endpoint: string) => fetchApi<T>(endpoint, { method: 'GET' }),
     post: <T>(endpoint: string, body: unknown) =>
